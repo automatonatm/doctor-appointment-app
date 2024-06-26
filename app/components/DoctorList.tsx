@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { getDoctors } from "../utils/GlobalApi";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface DoctorListProps {
   doctors: [];
@@ -10,7 +11,11 @@ interface DoctorListProps {
   heading?: string;
 }
 
-export const DoctorList: React.FC<DoctorListProps> = ({ doctors, loading, heading="Popular Doctors" }) => {
+export const DoctorList: React.FC<DoctorListProps> = ({
+  doctors,
+  loading,
+  heading = "Popular Doctors",
+}) => {
   return (
     <div className="mb-10 px-10">
       <h2 className="text-xl font-bold">{heading}</h2>
@@ -60,9 +65,11 @@ export const DoctorList: React.FC<DoctorListProps> = ({ doctors, loading, headin
                   <h2 className="text-sm text-gray-500">
                     {attributes?.Address}
                   </h2>
-                  <h2 className="rounder-full mt-2 w-full cursor-pointer rounded-full border-[1px] border-primary p-2 px-3 text-center text-[11px] text-primary hover:bg-primary hover:text-white">
-                    Book Now
-                  </h2>
+                  <Link href={`/details/${id}`} className="w-full">
+                    <h2 className="rounder-full mt-2 w-full cursor-pointer rounded-full border-[1px] border-primary p-2 px-3 text-center text-[11px] text-primary hover:bg-primary hover:text-white">
+                      Book Now
+                    </h2>
+                  </Link>
                 </div>
               </div>
             ))}
