@@ -13,7 +13,7 @@ function layout({ children }: LayoutProps) {
         {/* Categories */}
         <CategoryList />
       </div>
-      <div className="col-span-3">{children}</div>
+      <div className="col-span-4  md:col-span-3">{children}</div>
     </div>
   );
 }

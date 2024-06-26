@@ -3,14 +3,11 @@ import { getCategories } from "@/app/utils/GlobalApi";
 import React, { useEffect, useState } from "react";
 import {
   Command,
-  CommandDialog,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
-  CommandSeparator,
-  CommandShortcut,
 } from "@/components/ui/command";
 import Link from "next/link";
 import Image from "next/image";
@@ -23,7 +20,7 @@ export const CategoryList = () => {
   const path = usePathname();
   const category = path.split("/")[2];
 
-  console.log(category)
+  console.log(category);
 
   useEffect(() => {
     getCategoryList();
@@ -36,7 +33,7 @@ export const CategoryList = () => {
     setLoading(false);
   };
   return (
-    <div className="mt-5 flex h-screen flex-col">
+    <div className="mt-5 flex h-screen flex-col overflow-scroll">
       <Command>
         <CommandInput placeholder="Type a command or search..." />
         <CommandList>
@@ -48,12 +45,7 @@ export const CategoryList = () => {
                   <CommandItem key={id}>
                     <Link
                       href={`/search/${attributes?.Name}`}
-                      className={
-                        `
-                        flex w-full cursor-pointer items-center gap-2 rounded-md p-2 text-[14px] text-blue-600
-                        ${category === attributes?.Name && 'bg-blue-100'}
-                        `
-                    }
+                      className={`flex w-full cursor-pointer items-center gap-2 rounded-md p-2 text-[14px] text-blue-600 ${category === attributes?.Name && "bg-blue-100"} `}
                     >
                       <Image
                         src={attributes?.Icon?.data?.attributes?.url}

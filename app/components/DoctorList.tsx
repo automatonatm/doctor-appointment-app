@@ -4,36 +4,25 @@ import { getDoctors } from "../utils/GlobalApi";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-export const DoctorList = () => {
-  const [doctors, setDoctors] = useState<[]>([]);
-  const [loading, setLoading] = useState(true);
+interface DoctorListProps {
+  doctors: [];
+  loading: boolean;
+  heading?: string;
+}
 
-  useEffect(() => {
-    getDoctoryList();
-  }, []);
-
-  const getDoctoryList = async () => {
-    setLoading(true);
-    const data = await getDoctors();
-    setDoctors(data.data);
-    setLoading(false);
-  };
-
+export const DoctorList: React.FC<DoctorListProps> = ({ doctors, loading, heading="Popular Doctors" }) => {
   return (
     <div className="mb-10 px-10">
-      <h2 className="text-xl font-bold">Popular Doctors</h2>
+      <h2 className="text-xl font-bold">{heading}</h2>
       <div>
         {loading ? (
           <div className="mt-4 grid grid-cols-1 gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {
-              Array.from({ length: 6 }).map((_, index) => (
-                <div
-                  key={index}
-                  className="h-[220px] w-full bg-slate-200 rounded-lg animate-pulse"
-                ></div>
-              ))
-            }
-        
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div
+                key={index}
+                className="h-[220px] w-full animate-pulse rounded-lg bg-slate-200"
+              ></div>
+            ))}
           </div>
         ) : doctors && doctors.length > 0 ? (
           <div className="mt-4 grid grid-cols-1 gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
