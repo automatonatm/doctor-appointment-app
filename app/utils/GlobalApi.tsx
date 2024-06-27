@@ -30,6 +30,17 @@ export const getDoctors = async () => {
   }
 };
 
+
+export const getDoctorById = async (id: number) => {
+  try {
+    const response = await axiosClient.get(`/doctors/${id}?populate=*`);
+    return response.data;
+  } catch (err: any) {
+    console.log(err);
+    throw new Error(err);
+  }
+};
+
 export const getDoctorsByCategories = async (category: string) => {
   try {
     const response = await axiosClient.get(

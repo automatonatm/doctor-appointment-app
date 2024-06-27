@@ -55,21 +55,17 @@ export const Header: React.FC<HeaderProps> = ({ isLogedIn }) => {
       {isLogedIn ? (
         <Popover>
           <PopoverTrigger>
-            <Image
-              src={user?.picture}
-              height={40}
-              width={40}
-              alt="Image"
-              className="rounded-full"
-            />
+            <Image src={user?.picture as string}  height={40}  width={40} alt="Image" className="rounded-full" />
           </PopoverTrigger>
           <PopoverContent className="w-44">
             <ul className="flex flex-col gap-2">
-              <li className="cursor-pointer p-1 rounded-md hover:bg-slate-100">Profile</li>
-              <li className="cursor-pointer p-1 rounded-md hover:bg-slate-100">
+              <li className="cursor-pointer rounded-md p-1 hover:bg-slate-100">
+                Profile
+              </li>
+              <li className="cursor-pointer rounded-md p-1 hover:bg-slate-100">
                 My Booking
               </li>
-              <li className="cursor-pointer p-1 rounded-md hover:bg-slate-100">
+              <li className="cursor-pointer rounded-md p-1 hover:bg-slate-100">
                 <LogoutLink>Logout</LogoutLink>
               </li>
             </ul>
