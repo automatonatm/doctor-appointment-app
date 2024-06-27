@@ -15,7 +15,11 @@ import { Calendar } from "@/components/ui/calendar";
 import { CalendarDays, Clock } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 
-export const BookAppointment = () => {
+interface BookAppointmentProps {
+  doctor: {}
+}
+
+export const BookAppointment: React.FC<BookAppointmentProps> = ({doctor}) => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [timeSlot, setTimeSlot] = useState<any>();
   const [selectedTimeSlot, setSelectedTimeSlot] = useState();

@@ -49,12 +49,12 @@ export const DoctorDetails: React.FC<DoctorDetailsProps> = ({ doctor }) => {
           </div>
 
           <div>
-            <BookAppointment />
+            <BookAppointment doctor={attributes} />
           </div>
         </div>
       </div>
       {/* About */}
-      <div className="p-3 border-[1px] rounded-lg mt-5">
+      <div className="mt-5 rounded-lg border-[1px] p-3">
         <h2 className="text-[20px] font-bold">About me</h2>
         <p className="mt-2 tracking-wider text-gray-500">
           {`${attributes.About}`}

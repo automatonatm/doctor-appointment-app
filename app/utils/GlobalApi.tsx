@@ -3,6 +3,15 @@ import axios, { AxiosInstance } from "axios";
 const API_KEY = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
+interface BookAppointment {
+  UserName: string,
+  Email: string,
+  Date: string,
+  Time: string,
+  Note: string
+  doctor: number
+}
+
 const axiosClient: AxiosInstance = axios.create({
   baseURL,
   headers: {
@@ -30,7 +39,6 @@ export const getDoctors = async () => {
   }
 };
 
-
 export const getDoctorById = async (id: number) => {
   try {
     const response = await axiosClient.get(`/doctors/${id}?populate=*`);
@@ -46,6 +54,16 @@ export const getDoctorsByCategories = async (category: string) => {
     const response = await axiosClient.get(
       `/doctors?filters[categories][Name][$in]=${category}&populate=*`,
     );
+    return response.data;
+  } catch (err: any) {
+    console.log(err);
+    throw new Error(err);
+  }
+};
+
+export const bookAppointment = async (data: BookAppointment) => {
+  try {
+    const response = await axiosClient.post(`/doctors`, data);
     return response.data;
   } catch (err: any) {
     console.log(err);
