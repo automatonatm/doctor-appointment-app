@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import { GraduationCap, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BookAppointment } from "./BookAppointment";
 
 interface DoctorDetailsProps {
   doctor: {};
@@ -48,7 +49,7 @@ export const DoctorDetails: React.FC<DoctorDetailsProps> = ({ doctor }) => {
           </div>
 
           <div>
-            <Button className="mt-3 rounded-full">Book Appointment</Button>
+            <BookAppointment />
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
-import { CategoryList } from "./search/components/CategoryList";
+import { CategoryList } from "./components/CategoryList";
+
 
 interface LayoutProps {
   children: ReactNode;
