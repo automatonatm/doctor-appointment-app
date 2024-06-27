@@ -19,7 +19,7 @@ export const BookAppointment = () => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [timeSlot, setTimeSlot] = useState<any>();
   const [selectedTimeSlot, setSelectedTimeSlot] = useState();
-  const [note, setNote] = useState();
+  const [note, setNote] = useState<string>();
 
   const getTime = () => {
     const timeList = [];
@@ -99,7 +99,7 @@ export const BookAppointment = () => {
               <Textarea
                 className="mt-3"
                 placeholder="Note"
-                onChange={(e) => setNote(e.target.value)}
+                onChange={(e) => setNote(e.target.value as string)}
               />
             </div>
           </DialogDescription>
