@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { Toaster } from "@/components/ui/toaster";
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -26,8 +27,8 @@ export default async function RootLayout({
         <div className="md:px-20 xxl:mx-auto xxl:max-w-screen-2xl">
           <Header isLogedIn={isLogedIn} />
           {children}
+          <Toaster />
         </div>
-
         <Footer />
       </body>
     </html>

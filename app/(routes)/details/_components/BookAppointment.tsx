@@ -14,16 +14,23 @@ import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { CalendarDays, Clock } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import { BookAppointmentData, bookAppointment } from "@/app/utils/GlobalApi";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { useToast } from "@/components/ui/use-toast";
 
 interface BookAppointmentProps {
-  doctor: {}
+  doctor: any;
 }
 
-export const BookAppointment: React.FC<BookAppointmentProps> = ({doctor}) => {
+export const BookAppointment: React.FC<BookAppointmentProps> = ({ doctor }) => {
   const [date, setDate] = React.useState<Date | undefined>(new Date());
   const [timeSlot, setTimeSlot] = useState<any>();
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState();
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState<any>();
   const [note, setNote] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { toast } = useToast();
+
+  const { user } = useKindeBrowserClient();
 
   const getTime = () => {
     const timeList = [];
@@ -49,6 +56,26 @@ export const BookAppointment: React.FC<BookAppointmentProps> = ({doctor}) => {
 
   const isPastDay = (day: Date) => {
     return day <= new Date();
+  };
+
+  const _bookAppointment = async () => {
+    setLoading(true);
+
+    const data: BookAppointmentData = {
+      UserName: `${user?.given_name} ${user?.family_name}`,
+      Email: user?.email as string,
+      Date: date?.toDateString() as string,
+      Time: selectedTimeSlot,
+      Note: note as string,
+      doctor: doctor?.id,
+    };
+
+    await bookAppointment(data);
+    setLoading(false);
+    toast({
+      description: "Appointment created successfully",
+      variant:"default",
+    });
   };
 
   useEffect(() => {
@@ -118,8 +145,12 @@ export const BookAppointment: React.FC<BookAppointmentProps> = ({doctor}) => {
               Close
             </Button>
           </DialogClose>
-          <Button disabled={!(selectedTimeSlot && date)} type="button">
-            Submit
+          <Button
+            disabled={!(selectedTimeSlot && date)}
+            type="button"
+            onClick={() => _bookAppointment()}
+          >
+            {loading ? "Loading..." : "Book Appointment"}
           </Button>
         </DialogFooter>
       </DialogContent>

@@ -3,13 +3,13 @@ import axios, { AxiosInstance } from "axios";
 const API_KEY = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN;
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
 
-interface BookAppointment {
-  UserName: string,
-  Email: string,
-  Date: string,
-  Time: string,
-  Note: string
-  doctor: number
+export interface BookAppointmentData {
+  UserName: string;
+  Email: string;
+  Date: string;
+  Time: string;
+  Note: string;
+  doctor: number;
 }
 
 const axiosClient: AxiosInstance = axios.create({
@@ -61,9 +61,14 @@ export const getDoctorsByCategories = async (category: string) => {
   }
 };
 
-export const bookAppointment = async (data: BookAppointment) => {
+export const bookAppointment = async (bookingData: BookAppointmentData) => {
   try {
-    const response = await axiosClient.post(`/doctors`, data);
+
+    const data = {
+      data: bookingData,
+    };
+    
+    const response = await axiosClient.post(`/appointments`, data);
     return response.data;
   } catch (err: any) {
     console.log(err);

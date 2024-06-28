@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import { GraduationCap, MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { BookAppointment } from "./BookAppointment";
 
 interface DoctorDetailsProps {
@@ -10,7 +9,7 @@ interface DoctorDetailsProps {
 }
 
 export const DoctorDetails: React.FC<DoctorDetailsProps> = ({ doctor }) => {
-  const { attributes }: any = doctor;
+  const { attributes, id }: any = doctor;
 
   return (
     <>
@@ -49,7 +48,7 @@ export const DoctorDetails: React.FC<DoctorDetailsProps> = ({ doctor }) => {
           </div>
 
           <div>
-            <BookAppointment doctor={attributes} />
+            <BookAppointment doctor={doctor} />
           </div>
         </div>
       </div>
